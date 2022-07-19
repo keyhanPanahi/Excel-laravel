@@ -17,16 +17,16 @@ class UsersImport implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
-        if (!isset($row['melicode'])) {
+        if (!isset($row['meli_code'])) {
             return null;
         }
         return new User([
-            'username'       => '0'.$row['melicode'],
-            'first_name'     => $row['name'],
-            'last_name'      => $row['family'],
+            'username'       => '0'.$row['meli_code'],
+            'first_name'     => $row['f_name'],
+            'last_name'      => $row['l_name'],
             'mobile'         => '0'.$row['mobile'],
-            'email'          => $row['email'] ?? '0'.$row['melicode'].'@gmail.com',
-            'password'       => Hash::make($row['password']) ?? Hash::make('0'.$row['name']),
+            'email'          => $row['email'] ?? '0'.$row['meli_code'].'@gmail.com',
+            'password'       => Hash::make($row['password']) ?? Hash::make('0'.$row['f_name']),
             'organization_id'=> 1,
               ]);
     }
