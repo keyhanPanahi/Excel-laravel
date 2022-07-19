@@ -3,11 +3,12 @@
 namespace App\Imports;
 
 use App\Models\Membership\User;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class UsersImport implements ToModel,WithHeadingRow
+class UsersImport implements ToCollection,WithHeadingRow
 {
 
     /**
@@ -15,19 +16,24 @@ class UsersImport implements ToModel,WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public function model(array $row)
+    public function collection(Collection $rows)
     {
-        if (!isset($row['meli_code'])) {
-            return null;
+        foreach ($rows as $row){
+            if (!isset($row['meli_code'])) {
+                return null;
+            }
+            $user = User::create([
+                'username'       => '0'.$row['meli_code'],
+                'first_name'     => $row['f_name'],
+                'last_name'      => $row['l_name'],
+                'mobile'         => '0'.$row['mobile'],
+                'email'          => $row['email'] ?? '0'.$row['meli_code'].'@gmail.com',
+                'password'       => Hash::make($row['password']) ?? Hash::make('0'.$row['f_name']),
+                'organization_id'=> 1,
+            ]);
+            $user->syncRoles([$row['role']]);
         }
-        return new User([
-            'username'       => '0'.$row['meli_code'],
-            'first_name'     => $row['f_name'],
-            'last_name'      => $row['l_name'],
-            'mobile'         => '0'.$row['mobile'],
-            'email'          => $row['email'] ?? '0'.$row['meli_code'].'@gmail.com',
-            'password'       => Hash::make($row['password']) ?? Hash::make('0'.$row['f_name']),
-            'organization_id'=> 1,
-              ]);
+
+
     }
 }
