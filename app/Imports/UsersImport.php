@@ -5,12 +5,20 @@ namespace App\Imports;
 use App\Models\Membership\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithUpserts;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Validators\Failure;
 
-class UsersImport implements ToCollection,WithHeadingRow
+class UsersImport implements ToCollection,WithHeadingRow,WithValidation,SkipsOnFailure,SkipsOnError,WithUpserts
 {
-
+        use Importable,SkipsFailures,SkipsErrors;
     /**
     * @param array $row
     *
@@ -36,4 +44,31 @@ class UsersImport implements ToCollection,WithHeadingRow
 
 
     }
+    public function uniqueBy()
+    {
+        return ['username', 'mobile','email'];
+    }
+    public function rules(): array
+    {
+        return [
+            'username' => ['unique:users,username','max:10','min:10'],
+            'mobile' => ['unique:users,mobile'],
+            'email' => ['unique:users,email'],
+        ];
+    }
+    public function customValidationMessages()
+    {
+        return [
+            'mobile.unique' => 'شماره موبایل قبلا انتخاب شده است!',
+            'email.unique' => 'ایمیل قبلا انتخاب شده است!',
+            'username.unique' => 'کدملی قبلا انتخاب شده است!',
+            'username.max' => 'کدملی نباید بیشتر نباید ده رقم باشد!',
+            'username.min' => 'کدملی نباید کمتر نباید ده رقم باشد!',
+        ];
+    }
+
+
+
+
+
 }

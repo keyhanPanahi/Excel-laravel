@@ -177,9 +177,18 @@ class UserController extends Controller
     public function importUpload(Request $request)
     {
         if ($request->hasFile('importFile')) {
+            $import = new UsersImport();
+            $import->import( request()->file('importFile'));
+            if($import->failures()->isNotEmpty()){
+
+                return back()->withFailure($import->failures());
+        }
             Excel::import(new UsersImport, request()->file('importFile'));
             return to_route('admin.membership.user.index')->with('toast-success','فایل شما با موفقیت وارد شد.');
         }
+        else{
+            return back()->with('toast-error','موردی انتخاب نشده است.');
+        }}
 
-    }
+
 }

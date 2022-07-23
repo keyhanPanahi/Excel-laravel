@@ -44,6 +44,44 @@
                             @enderror
                         </div>
                     </div>
+{{--                     @if(isset($errors) && $errors->any())--}}
+{{--                            @foreach($errors->first() as $error)--}}
+{{--                            <div class="mb-1">--}}
+{{--                                <span class="text-danger"> * {{ $errors->first() }}</span>--}}
+{{--                            </div>--}}
+
+{{--                        @endforeach--}}
+
+{{--                    @endif--}}
+                    <div class="m-2">
+                    @if(session()->has('failure'))
+                            <h5 class="text-danger ">فایل وارد شده دارای خطاست!</h5>
+                            <hr>
+                        <table class="table table-danger">
+                            <tr>
+                                <th>ستون</th>
+                                <th>فیلد</th>
+                                <th>خطا</th>
+                                <th>مقدار</th>
+                            </tr>
+                        @foreach(session()->get('failure') as $validation)
+                            <tr>
+                                <td>{{ $validation->row() }}</td>
+                                <td>{{ $validation->attribute() }}</td>
+                                <td>
+
+                                        @foreach($validation->errors() as $e)
+                                            {{ $e }}
+                                        @endforeach
+
+                                </td>
+                                <td>{{ $validation->values()[$validation->attribute()] }}</td>
+                            </tr>
+                        @endforeach
+                        </table>
+
+                    @endif
+                </div>
                 </div>
             </div>
 
