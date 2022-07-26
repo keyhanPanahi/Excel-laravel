@@ -28,8 +28,8 @@ class UsersImport implements ToCollection,WithHeadingRow,WithValidation,SkipsOnF
     {
         foreach ($rows as $row){
 //            if (!isset($row['meli_code'])) {
-//                return null;
-//            }
+////                return null;
+////            }
             $user = User::create([
                 'username'       => $row['meli_code'],
                 'first_name'     => $row['f_name'],
@@ -51,9 +51,9 @@ class UsersImport implements ToCollection,WithHeadingRow,WithValidation,SkipsOnF
     public function rules(): array
     {
         return [
-            'meli_code' => ['unique:users,username','max:10','min:10'],
-            'mobile' => ['unique:users,mobile','max:11','min:11'],
-            'email' => ['unique:users','email'],
+            'meli_code' => ['unique:users,username','max:10','min:10','distinct'],
+            'mobile' => ['unique:users,mobile','max:11','min:11','distinct'],
+            'email' => ['unique:users','email','distinct'],
             'role' => ['in:4,5,7,8'],
         ];
     }
@@ -63,11 +63,14 @@ class UsersImport implements ToCollection,WithHeadingRow,WithValidation,SkipsOnF
             'mobile.unique' => 'شماره موبایل قبلا انتخاب شده است!',
             'mobile.max' => 'شماره موبایل نباید بیشتر از 11 رقم باشد!',
             'mobile.min' => 'شماره موبایل نباید کمتر از 11 رقم باشد!',
+            'mobile.distinct' => 'شماره موبایل دارای یک مقدار تکراری است!',
             'email.unique' => 'ایمیل قبلا انتخاب شده است!',
             'email.email' => 'فرمت ایمیل اشتباه است!',
+            'email.distinct' => 'ایمیل دارای یک مقدار تکراری است!',
             'meli_code.unique' => 'کدملی قبلا انتخاب شده است!',
             'meli_code.max' => 'کدملی نباید بیشتر از 10 رقم باشد!',
             'meli_code.min' => 'کدملی نباید کمتر از 10 رقم باشد!',
+            'meli_code.distinct' => 'کدملی دارای یک مقدار تکراری است!',
             'role.in' => 'کد نقش صحیح نمی باشد! (فرمت صحیح: 4,5,7,8)',
         ];
     }
