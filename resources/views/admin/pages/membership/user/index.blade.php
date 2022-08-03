@@ -87,8 +87,10 @@
 
     <div class="d-flex justify-content-between bd-highlight">
         <div class="p-2 bd-highlight">
-            <a href="{{ route('admin.membership.user.create') }}" class="btn btn-primary"><i class="bx bx-user-plus"></i> ایجاد کاربر</a>
-            <a href="{{ route('admin.membership.user.import.index') }}" class="btn btn-success"><i class="bx bxs-file-plus"></i> وارد کردن فایل</a>
+            <a href="{{ route('admin.membership.user.create') }}" class="btn btn-primary " title="ایجاد کاربر"><i class="bx bx-user-plus"></i></a>
+            <a href="{{ route('admin.membership.user.import.index') }}" class="btn btn-success" title="وارد کردن کاربر"><i class="bx bxs-file-plus"></i></a>
+            <button type="button" onclick="printreport()" class="btn btn-warning" title="پرینت لیست کاربر"><i class="bx bx-printer"></i></button>
+{{--            <a href="{{ route('admin.membership.user.printUser') }}" class="btn btn-secondary" title="پرینت لیست کاربر"><i class="bx bx-bar-chart-alt"></i> </a>--}}
         </div>
         <div class="p-2 bd-highlight col-3">
                 <select class="select-user-role" id="user_filter" data-column="3" data-allow-clear="true">
@@ -157,6 +159,9 @@
     <!-- select2-->
     <script src="{{ asset('admin-assets/vendor/libs/select2/select2.js') }}"></script>
     <script src="{{ asset('admin-assets/vendor/libs/select2/i18n/fa.js') }}"></script>
+    //
+    <script src="{{ asset('admin-assets/audio/stimulsoft/stimulsoft.reports.js') }}"></script> <!-- Jquery Validation Plugin Css -->
+
 @endsection
 
 @section('page-js')
@@ -243,4 +248,46 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        // Create a new report instance
+        // Load report from url
+        var _token = $('input[name="_token"]').attr('value');
+        var report = new Stimulsoft.Report.StiReport();
+        report.loadFile("{{ asset('admin-assets/audio/Report-5.mrt') }}");
+        var json = {!! $print !!};
+        var dataSet = new Stimulsoft.System.Data.DataSet("json");
+
+        dataSet.readJson(json);
+        report.regData("json", "json", dataSet);
+
+        report.renderAsync();
+
+        function printreport() {
+            $.ajax({
+                url: "{{Route('admin.membership.user.logprint')}}",
+                type: "POST",
+                data : {_token:_token },
+                dataType: "json",
+                success:function(data) {
+                    console.log(data)
+                    return data;
+                },
+            });
+            report.exportDocumentAsync(function (pdfData) {
+                // Create blob data
+                var blob = new Blob([new Uint8Array(pdfData)], { type: "application/pdf" });
+
+                if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                    // Internet Explorer does not support the output of blob data, only save as PDF file
+                    var fileName = report.reportAlias;
+                    window.navigator.msSaveOrOpenBlob(blob, fileName + ".pdf");
+                } else {
+                    // Show the new tab with the blob data
+                    var fileURL = URL.createObjectURL(blob);
+                    window.open(fileURL);
+                }
+            }, Stimulsoft.Report.StiExportFormat.Pdf);
+        }
+    </script>
+
 @endsection

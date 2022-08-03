@@ -19,6 +19,10 @@ Route::get('/', function () {
     return to_route('admin.dashboard');
 });
 
+Route::get('/opt',function (){
+   \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+
+});
 Route::prefix('/admin')->middleware(['auth'])->group(function() {
 
     //select
@@ -54,6 +58,9 @@ Route::prefix('/admin')->middleware(['auth'])->group(function() {
             Route::get('/import',[UserController::class , 'importIndex'])->name('admin.membership.user.import.index');
             Route::get('/sample',[UserController::class , 'importSample'])->name('admin.membership.user.import.sample');
             Route::post('/upload',[UserController::class , 'importUpload'])->name('admin.membership.user.import.upload');
+            //print
+            Route::get('/logprint',[UserController::class,'logprint'])->name('admin.membership.user.logprint');
+            Route::get('/printUser',[UserController::class,'printUser'])->name('admin.membership.user.printUser');
         });
 
         //organization

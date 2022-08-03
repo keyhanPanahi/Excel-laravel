@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="1">
+      <json Ref="2" type="Stimulsoft.Report.Dictionary.StiMySqlDatabase" isKey="true">
+        <Alias>json</Alias>
+        <ConnectionStringEncrypted>41zRa8ZMMZlsE9XASJykP4twm2DGS1mkyxX9jeo99XuLIGmvTUrzBeJN+fHDBDtjvXBPieYI+w==</ConnectionStringEncrypted>
+        <Key>f59c15f60bc54e0aaf6b776e39d77aa7</Key>
+        <Name>json</Name>
+      </json>
+    </Databases>
+    <DataSources isList="true" count="10">
+      <migrations Ref="3" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>migrations</Alias>
+        <Columns isList="true" count="3">
+          <value>id,System.Int32</value>
+          <value>migration,System.String</value>
+          <value>batch,System.Int32</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>15f1d64f0a66494288e084f130d2f57b</Key>
+        <Name>migrations</Name>
+        <NameInSource>json</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from migrations</SqlCommand>
+      </migrations>
+      <model_has_permissions Ref="4" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>model_has_permissions</Alias>
+        <Columns isList="true" count="3">
+          <value>permission_id,System.Int64</value>
+          <value>model_type,System.String</value>
+          <value>model_id,System.Int64</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>60771768262840b1888bdf019cdf6e1a</Key>
+        <Name>model_has_permissions</Name>
+        <NameInSource>json</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from model_has_permissions</SqlCommand>
+      </model_has_permissions>
+      <model_has_roles Ref="5" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>model_has_roles</Alias>
+        <Columns isList="true" count="3">
+          <value>role_id,System.Int64</value>
+          <value>model_type,System.String</value>
+          <value>model_id,System.Int64</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>2149145fa9f64fb8b55c515e1e58ef4a</Key>
+        <Name>model_has_roles</Name>
+        <NameInSource>json</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from model_has_roles</SqlCommand>
+      </model_has_roles>
+      <organizations Ref="6" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>organizations</Alias>
+        <Columns isList="true" count="17">
+          <value>id,System.Int64</value>
+          <value>name,System.String</value>
+          <value>parent_id,System.Int64</value>
+          <value>national_code,System.String</value>
+          <value>manager_id,System.Int64</value>
+          <value>inderpent,System.SByte</value>
+          <value>email,System.String</value>
+          <value>phone,System.String</value>
+          <value>address,System.String</value>
+          <value>fax,System.String</value>
+          <value>website,System.String</value>
+          <value>logo,System.String</value>
+          <value>slug,System.String</value>
+          <value>status,System.SByte</value>
+          <value>created_at,System.DateTime</value>
+          <value>updated_at,System.DateTime</value>
+          <value>deleted_at,System.DateTime</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>a712e98539ef401ba8d75cbea85abff3</Key>
+        <Name>organizations</Name>
+        <NameInSource>json</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from organizations</SqlCommand>
+      </organizations>
+      <permissions Ref="7" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>permissions</Alias>
+        <Columns isList="true" count="7">
+          <value>id,System.Int64</value>
+          <value>name,System.String</value>
+          <value>guard_name,System.String</value>
+          <value>title,System.String</value>
+          <value>parent_id,System.Int64</value>
+          <value>created_at,System.DateTime</value>
+          <value>updated_at,System.DateTime</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>5a1c2760aa0e4b8fb5102fde64cb528a</Key>
+        <Name>permissions</Name>
+        <NameInSource>json</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from permissions</SqlCommand>
+      </permissions>
+      <personal_access_tokens Ref="8" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>personal_access_tokens</Alias>
+        <Columns isList="true" count="9">
+          <value>id,System.Int64</value>
+          <value>tokenable_type,System.String</value>
+          <value>tokenable_id,System.Int64</value>
+          <value>name,System.String</value>
+          <value>token,System.String</value>
+          <value>abilities,System.String</value>
+          <value>last_used_at,System.DateTime</value>
+          <value>created_at,System.DateTime</value>
+          <value>updated_at,System.DateTime</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>5fed450bb96248c4a8578743685bbd0e</Key>
+        <Name>personal_access_tokens</Name>
+        <NameInSource>json</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from personal_access_tokens</SqlCommand>
+      </personal_access_tokens>
+      <role_has_permissions Ref="9" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>role_has_permissions</Alias>
+        <Columns isList="true" count="2">
+          <value>permission_id,System.Int64</value>
+          <value>role_id,System.Int64</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>737e6ef8f70b4194a4318b6230889eef</Key>
+        <Name>role_has_permissions</Name>
+        <NameInSource>json</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from role_has_permissions</SqlCommand>
+      </role_has_permissions>
+      <roles Ref="10" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>roles</Alias>
+        <Columns isList="true" count="7">
+          <value>id,System.Int64</value>
+          <value>name,System.String</value>
+          <value>guard_name,System.String</value>
+          <value>title,System.String</value>
+          <value>parent_id,System.Int64</value>
+          <value>created_at,System.DateTime</value>
+          <value>updated_at,System.DateTime</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>4f4b082adc3743698a843cb129e490c5</Key>
+        <Name>roles</Name>
+        <NameInSource>json</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from roles</SqlCommand>
+      </roles>
+      <sexes Ref="11" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>sexes</Alias>
+        <Columns isList="true" count="6">
+          <value>id,System.Int64</value>
+          <value>name,System.String</value>
+          <value>status,System.SByte</value>
+          <value>created_at,System.DateTime</value>
+          <value>updated_at,System.DateTime</value>
+          <value>deleted_at,System.DateTime</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>66268ed96447405f81e10e833a8c43a1</Key>
+        <Name>sexes</Name>
+        <NameInSource>json</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from sexes</SqlCommand>
+      </sexes>
+      <users Ref="12" type="Stimulsoft.Report.Dictionary.StiMySqlSource" isKey="true">
+        <Alias>users</Alias>
+        <Columns isList="true" count="20">
+          <value>id,System.Int64</value>
+          <value>username,System.String</value>
+          <value>first_name,System.String</value>
+          <value>last_name,System.String</value>
+          <value>organization_id,System.Int64</value>
+          <value>email,System.String</value>
+          <value>mobile,System.String</value>
+          <value>address,System.String</value>
+          <value>avatar,System.String</value>
+          <value>sex_id,System.Int64</value>
+          <value>slug,System.String</value>
+          <value>status,System.SByte</value>
+          <value>password,System.String</value>
+          <value>two_factor_secret,System.String</value>
+          <value>two_factor_recovery_codes,System.String</value>
+          <value>email_verified_at,System.DateTime</value>
+          <value>remember_token,System.String</value>
+          <value>created_at,System.DateTime</value>
+          <value>updated_at,System.DateTime</value>
+          <value>deleted_at,System.DateTime</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Key>0407bae349a649aea384f30ace43fe15</Key>
+        <Name>users</Name>
+        <NameInSource>json</NameInSource>
+        <Parameters isList="true" count="0" />
+        <SqlCommand>select * from users</SqlCommand>
+      </users>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Resources isList="true" count="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Key>d2d26c622267431baf318fd26bbf5dce</Key>
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="13" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <PageHeaderBand1 Ref="14" type="PageHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,0.8</ClientRectangle>
+          <Components isList="true" count="1">
+            <Text1 Ref="15" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.4,0.2,1.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>2  Mah,14</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="13" />
+              <Parent isRef="14" />
+              <Text>سلام بر تو 2</Text>
+              <TextBrush>Black</TextBrush>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <Expressions isList="true" count="0" />
+          <Name>PageHeaderBand1</Name>
+          <Page isRef="13" />
+          <Parent isRef="13" />
+        </PageHeaderBand1>
+        <Datausers Ref="16" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid isNull="true" />
+          <ClientRectangle>0,2,19,0.8</ClientRectangle>
+          <Components isList="true" count="6">
+            <Datausers_username Ref="17" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>0,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datausers_username</Name>
+              <Page isRef="13" />
+              <Parent isRef="16" />
+              <Text>{users.username}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datausers_username>
+            <Datausers_first_name Ref="18" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>3.2,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datausers_first_name</Name>
+              <Page isRef="13" />
+              <Parent isRef="16" />
+              <Text>{users.first_name}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datausers_first_name>
+            <Datausers_mobile Ref="19" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>6.4,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datausers_mobile</Name>
+              <Page isRef="13" />
+              <Parent isRef="16" />
+              <Text>{users.mobile}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datausers_mobile>
+            <Datausers_email Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>9.6,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datausers_email</Name>
+              <Page isRef="13" />
+              <Parent isRef="16" />
+              <Text>{users.email}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datausers_email>
+            <Datausers_organization_id Ref="21" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>12.8,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datausers_organization_id</Name>
+              <Page isRef="13" />
+              <Parent isRef="16" />
+              <Text>{users.organization_id}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datausers_organization_id>
+            <Datausers_last_name Ref="22" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>16,0,3,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Expressions isList="true" count="0" />
+              <Font>Arial,8</Font>
+              <Margins>0,0,0,0</Margins>
+              <Name>Datausers_last_name</Name>
+              <Page isRef="13" />
+              <Parent isRef="16" />
+              <Text>{users.last_name}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>,,,,WordWrap=True,A=0</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </Datausers_last_name>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataSourceName>users</DataSourceName>
+          <Expressions isList="true" count="0" />
+          <Filters isList="true" count="0" />
+          <Name>Datausers</Name>
+          <Page isRef="13" />
+          <Parent isRef="13" />
+          <Sort isList="true" count="0" />
+        </Datausers>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Expressions isList="true" count="0" />
+      <Guid>cfb888b9bfc143c781c1e77808faec01</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+    </Page1>
+  </Pages>
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>8/2/2022 6:52:26 PM</ReportChanged>
+  <ReportCreated>8/2/2022 6:49:19 PM</ReportCreated>
+  <ReportFile>C:\Users\Keyhan\Desktop\Report-3.mrt</ReportFile>
+  <ReportGuid>42b9363648194bc2924763cadf581ecd</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2022.1.1.0</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

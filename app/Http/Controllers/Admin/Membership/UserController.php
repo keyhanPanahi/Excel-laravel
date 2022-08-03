@@ -56,11 +56,46 @@ class UserController extends Controller
             ->make(true);
         }
 
+        $data = User::all();
+
+        $print = $this->getprintjson($data);
         $userRole = Role::where('name','users')->first();
         $organizations = Organization::select('id','name')->get();
-        return view('admin.pages.membership.user.index',compact('userRole','organizations'));
+        return view('admin.pages.membership.user.index',compact('userRole','organizations','print'));
+    }
+    public function getprintjson($data){
+        $users = User::select('id','username','first_name','last_name','organization_id','email','mobile')->get();
+        $allUsers = array(
+                "user"=>array()
+        );
+
+        foreach ($users as $user){
+
+            $a=array("username"=>$user->username,
+                "first_name"=>$user->first_name,
+                "last_name"=>$user->last_name,
+                "organization_id"=>$user->organization->name,
+                "email"=>$user->email,
+                "mobile"=>$user->mobile,
+            );
+            array_push($allUsers['user'],$a);
+
+        }
+        return json_encode($allUsers);
     }
 
+    public function printUser()
+    {
+        $data = User::all();
+
+        $print = $this->getprintjson($data);
+        return view('admin.pages.printform10',compact('print'));
+    }
+
+    public function logprint($id)
+    {
+        return response()->json("data");
+    }
 
     public function create()
     {
