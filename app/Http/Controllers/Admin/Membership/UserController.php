@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\Finder\Finder;
 use Yajra\DataTables\DataTables;
 use Intervention\Image\ImageManagerStatic as Image;
 
@@ -56,27 +57,51 @@ class UserController extends Controller
             ->make(true);
         }
 
-        $data = User::all();
-
-        $print = $this->getprintjson($data);
+//        $data = User::all();
+//
+//        $print = $this->getprintjson($data);
         $userRole = Role::where('name','users')->first();
         $organizations = Organization::select('id','name')->get();
-        return view('admin.pages.membership.user.index',compact('userRole','organizations','print'));
+        return view('admin.pages.membership.user.index',compact('userRole','organizations'));
     }
     public function getprintjson($data){
-        $users = User::select('id','username','first_name','last_name','organization_id','email','mobile')->get();
         $allUsers = array(
                 "user"=>array()
         );
 
-        foreach ($users as $user){
+//        $finder = new Finder();
+//        $finder->files()->in(public_path('admin-assets/file/avatar'));
+//        if ($finder->hasResults()) {
+//            foreach ($finder as $file) {
+//                $contents = $file->getContents();
+//                $absoluteFilePath = $file->getRealPath();
+//                $fileExtension = $file->getExtension();
+//            }
+//        }
 
-            $a=array("username"=>$user->username,
+        foreach ($data as $user){
+            $path = public_path(env('AVATAR_PATH') . $user->avatar);
+            if($path == public_path(env('AVATAR_PATH') )){
+                $user->sex_id == 1 ? $path = public_path(env('AVATAR_WOMAN')) : $path = public_path(env('AVATAR_MAN'));
+            }
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            if (file_exists($path) ){
+                $pic = file_get_contents($path);
+                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($pic);
+            }else{
+
+                $base64 = null;
+            }
+            $a=array(
+                "username"=>$user->username,
                 "first_name"=>$user->first_name,
                 "last_name"=>$user->last_name,
                 "organization_id"=>$user->organization->name,
                 "email"=>$user->email,
                 "mobile"=>$user->mobile,
+                "address"=>$user->address,
+                "avatar"=>$base64,
+                "sex_id"=>$user->sex_id == 1 ? 'زن' : 'مرد',
             );
             array_push($allUsers['user'],$a);
 
@@ -84,13 +109,13 @@ class UserController extends Controller
         return json_encode($allUsers);
     }
 
-    public function printUser()
-    {
-        $data = User::all();
-
-        $print = $this->getprintjson($data);
-        return view('admin.pages.printform10',compact('print'));
-    }
+//    public function printUser()
+//    {
+//        $data = User::all();
+//
+//        $print = $this->getprintjson($data);
+//        return view('admin.pages.printform10',compact('print'));
+//    }
 
     public function logprint($id)
     {
@@ -196,6 +221,17 @@ class UserController extends Controller
         if($request->ids){
             User::whereIn('id',$request->ids)->update(['status' => $request->status]);
             return back()->with('toast-success','وضعیت موارد انتخابی تغییر یافت.');
+        }
+
+        return back()->with('toast-error','موردی انتخاب نشده است.');
+    }
+
+    public function printUser(Request $request)
+    {
+        if($request->ids){
+            $data = User::whereIn('id',$request->ids)->get();
+            $print = $this->getprintjson($data);
+            return view('admin.pages.printform11',compact('print'));
         }
 
         return back()->with('toast-error','موردی انتخاب نشده است.');

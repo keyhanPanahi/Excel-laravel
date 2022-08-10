@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  />
-    <title>Print report</title>
+    <title>چاپ کاربر</title>
 
     <!-- Stimusloft Reports.JS -->
 {{--    <script src="{{ asset('admin-assets/audio/stimulsoft/css/stimulsoft.viewer.office2013.whiteblue.css') }}"></script> <!-- Jquery Validation Plugin Css -->--}}
@@ -28,7 +28,7 @@
     // Create a new report instance
     var report = new Stimulsoft.Report.StiReport();
     // Load report from url
-    report.loadFile("{{ asset('admin-assets/audio/Report-5.mrt') }}");
+    report.loadFile("{{ asset('admin-assets/audio/Report-6.mrt') }}");
 
 
     var json = {!! $print !!};

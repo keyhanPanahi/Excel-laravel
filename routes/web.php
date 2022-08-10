@@ -60,7 +60,7 @@ Route::prefix('/admin')->middleware(['auth'])->group(function() {
             Route::post('/upload',[UserController::class , 'importUpload'])->name('admin.membership.user.import.upload');
             //print
             Route::get('/logprint',[UserController::class,'logprint'])->name('admin.membership.user.logprint');
-            Route::get('/printUser',[UserController::class,'printUser'])->name('admin.membership.user.printUser');
+            Route::post('/printUser',[UserController::class,'printUser'])->name('admin.membership.user.printUser');
         });
 
         //organization

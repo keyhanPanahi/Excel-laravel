@@ -1,13 +1,14 @@
-<script> 
+<script>
     $(function () {
-        'use strict'; 
-     
+        'use strict';
+
         var deleteConfirm = $('.delete-confirm');
         var active = $('#active');
         var deactive = $('#deactive');
-     
+        var print = $('#print');
+
         //--------------- Confirm Options ---------------
-       
+
         //delete confirm
         if (deleteConfirm.length) {
             deleteConfirm.on('click', function () {
@@ -23,25 +24,25 @@
                         cancelButton: 'btn btn-outline-danger ms-1'
                     },
                 buttonsStyling: false
-                }).then((result) => { 
+                }).then((result) => {
                 if (result.value == true) {
                     $('#form').submit();
-                } 
+                }
                 else if (result.dismiss === Swal.DismissReason.cancel) {
                     Swal.fire({
                         title: 'لغو درخواست',
                         text: "درخواست شما لغو شد.",
-                        icon: 'error', 
+                        icon: 'error',
                         confirmButtonText: 'تایید.',
                         customClass: {
-                        confirmButton: 'btn btn-success', 
+                        confirmButton: 'btn btn-success',
                         }
                     });
                     }
                 });
             });
         }
-        
+
         //avtive confirm
         if (active.length) {
             active.on('click', function () {
@@ -57,21 +58,21 @@
                         cancelButton: 'btn btn-outline-danger ms-1'
                     },
                 buttonsStyling: false
-                }).then((result) => { 
+                }).then((result) => {
                 if (result.value == true) {
                     let form = document.getElementById('form');
                     form.action = this.value;
                     document.getElementById('status').value = 1;
                     form.submit();
-                } 
+                }
                 else if (result.dismiss === Swal.DismissReason.cancel) {
                     Swal.fire({
                         title: 'لغو درخواست',
                         text: "درخواست شما لغو شد.",
-                        icon: 'error', 
+                        icon: 'error',
                         confirmButtonText: 'تایید.',
                         customClass: {
-                        confirmButton: 'btn btn-success', 
+                        confirmButton: 'btn btn-success',
                         }
                     });
                     }
@@ -95,23 +96,59 @@
                         cancelButton: 'btn btn-outline-danger ms-1'
                     },
                 buttonsStyling: false
-                }).then((result) => { 
+                }).then((result) => {
                 if (result.value == true) {
                     let form = document.getElementById('form');
                     form.action = this.value;
                     document.getElementById('status').value = 0;
                     form.submit();
-                } 
+                }
                 else if (result.dismiss === Swal.DismissReason.cancel) {
                     Swal.fire({
                         title: 'لغو درخواست',
                         text: "درخواست شما لغو شد.",
-                        icon: 'error', 
+                        icon: 'error',
                         confirmButtonText: 'تایید.',
                         customClass: {
-                        confirmButton: 'btn btn-success', 
+                        confirmButton: 'btn btn-success',
                         }
                     });
+                    }
+                });
+            });
+        }
+
+        //print confirm
+        if (print.length) {
+            print.on('click', function () {
+                Swal.fire({
+                    title: 'آیا از چاپ موارد انتخابی مطمئن هستید؟',
+                    text: "شما میتوانید درخواست خود را لغو نمایید.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'بله چاپ شود.',
+                    cancelButtonText: 'خیر درخواست لغو شود.',
+                    customClass: {
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-outline-danger ms-1'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (result.value == true) {
+                        let form = document.getElementById('form');
+                        form.action = this.value;
+                        $('#form').submit();
+                    }
+                    else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire({
+                            title: 'لغو درخواست',
+                            text: "درخواست شما لغو شد.",
+                            icon: 'error',
+                            confirmButtonText: 'تایید.',
+                            customClass: {
+                                confirmButton: 'btn btn-success',
+                            }
+                        });
                     }
                 });
             });
