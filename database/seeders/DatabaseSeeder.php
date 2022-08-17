@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             SexSeeder::class,
             OrganizationSeeder::class,
             UserSeeder::class,
+            BookSeeder::class,
         ]);
     }
 }

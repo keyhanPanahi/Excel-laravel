@@ -1,13 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookPurchaseController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\Membership\RoleController;
-use App\Http\Controllers\Admin\Membership\PermissionController;
-use App\Http\Controllers\Admin\Membership\UserController;
-use App\Http\Controllers\Admin\Membership\OrganizationController;
-use App\Http\Controllers\Admin\Membership\ProfileController;
 use App\Http\Controllers\Admin\Sevice\SelectController;
+use App\Http\Controllers\Admin\Membership\RoleController;
+use App\Http\Controllers\Admin\Membership\UserController;
+use App\Http\Controllers\Admin\Membership\ProfileController;
+use App\Http\Controllers\Admin\Membership\PermissionController;
+use App\Http\Controllers\Admin\Membership\OrganizationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -95,6 +97,13 @@ Route::prefix('/admin')->middleware(['auth'])->group(function() {
             Route::post('/destroy',[PermissionController::class,'destroy'])->name('admin.membership.permission.destroy');
         });
 
+        //books
+        Route::get('/books',[BookController::class,'index'])->name('admin.book.index');
+        Route::get('/books/{book}/show',[BookController::class,'show'])->name('admin.book.show');
+        Route::get('/books/library',[BookController::class,'library'])->name('admin.book.library');
+        Route::get('/books/{book}/purchase',[BookPurchaseController::class,'purchase'])->name('admin.book.purchase');
+        Route::get('/books/{book}/purchase/result',[BookPurchaseController::class,'result'])->name('admin.book.purchase.result');
+        Route::get('/transactions',[BookPurchaseController::class,'transactionShow'])->name('admin.transactionShow');
     });
 
 });

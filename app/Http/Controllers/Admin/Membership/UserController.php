@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Facades\Excel;
-use Symfony\Component\Finder\Finder;
 use Yajra\DataTables\DataTables;
 use Intervention\Image\ImageManagerStatic as Image;
+use ZipArchive;
 
 class UserController extends Controller
 {
@@ -64,21 +64,11 @@ class UserController extends Controller
         $organizations = Organization::select('id','name')->get();
         return view('admin.pages.membership.user.index',compact('userRole','organizations'));
     }
+
     public function getprintjson($data){
         $allUsers = array(
                 "user"=>array()
         );
-
-//        $finder = new Finder();
-//        $finder->files()->in(public_path('admin-assets/file/avatar'));
-//        if ($finder->hasResults()) {
-//            foreach ($finder as $file) {
-//                $contents = $file->getContents();
-//                $absoluteFilePath = $file->getRealPath();
-//                $fileExtension = $file->getExtension();
-//            }
-//        }
-
         foreach ($data as $user){
             $path = public_path(env('AVATAR_PATH') . $user->avatar);
             if($path == public_path(env('AVATAR_PATH') )){
@@ -241,10 +231,19 @@ class UserController extends Controller
     {
         return view('admin.pages.membership.user.import.index');
     }
+
     public function importSample()
     {
         return Response::download(public_path('storage/samples/'.'users.xlsx'));
+//        return Response::download(public_path('storage/samples/'.'file3.txt'));
+//        $zipname ='sample.zip';
+//        $zip = new ZipArchive();
+//        $createZIP = $zip->open(public_path('storage/samples/'.DIRECTORY_SEPARATOR.$zipname),ZipArchive::CREATE);
+//        $zip->addFile(public_path('storage/temporary/'.$unique_path.DIRECTORY_SEPARATOR.$file->original_name), $file->original_name);
+//        return response()->download(public_path('storage/temporary/'.$zipname))->deleteFileAfterSend(true);
+
     }
+
     public function importUpload(Request $request)
     {
         if ($request->hasFile('importFile')) {

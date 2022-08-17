@@ -16,13 +16,31 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-     
+
       <li class="menu-item @if(Route::currentRouteName() == 'admin.dashboard') active @endif">
         <a href="{{ route('admin.dashboard') }}" class="menu-link">
           <i class="menu-icon tf-icons bx bx-home-circle"></i>
           <div>داشبورد</div>
         </a>
       </li>
-      
+      <li class="menu-item">
+        <a href="{{ route('admin.book.index') }}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-book"></i>
+          <div>خرید کتاب</div>
+        </a>
+      </li>
+        <li class="menu-item">
+            <a href="{{ route('admin.book.library') }}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-book-open"></i>
+          <div>مشاهده کتابخانه شخصی</div>
+        </a>
+      </li>
+        <li class="menu-item">
+            <a href="{{ route('admin.transactionShow') }}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-money"></i>
+          <div>مشاهده تراکنش ها</div>
+        </a>
+      </li>
+
     </ul>
   </aside>

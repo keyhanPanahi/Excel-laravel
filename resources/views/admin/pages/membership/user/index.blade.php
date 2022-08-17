@@ -248,7 +248,7 @@
             });
         });
     </script>
-{{--    <script type="text/javascript">--}}
+   <script type="text/javascript">
 {{--        // Create a new report instance--}}
 {{--        // Load report from url--}}
 {{--        var _token = $('input[name="_token"]').attr('value');--}}
@@ -288,6 +288,6 @@
 {{--                }--}}
 {{--            }, Stimulsoft.Report.StiExportFormat.Pdf);--}}
 {{--        }--}}
-{{--    </script>--}}
+{{--    </script>
 
 @endsection
