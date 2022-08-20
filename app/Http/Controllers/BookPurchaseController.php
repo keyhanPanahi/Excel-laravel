@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\Payment\PaymentSetting;
 use App\Models\Book;
 use App\Models\PurchasedBook;
 use Exception;
@@ -32,8 +33,6 @@ class BookPurchaseController extends Controller
         try {
         $invoice = new Invoice();
         $invoice->amount($book->price);
-
-
         $user = Auth::user();
 
         $paymentId = md5(uniqid());

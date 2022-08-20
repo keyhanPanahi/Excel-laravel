@@ -1,16 +1,19 @@
 <?php
 
+
+
 return [
-    /*
-    |--------------------------------------------------------------------------
-    | Default Driver
-    |--------------------------------------------------------------------------
-    |
-    | This value determines which of the following gateway to use.
-    | You can switch to a different driver at runtime.
-    |
-    */
-    'default' => 'zarinpal',
+
+/*
+|--------------------------------------------------------------------------
+| Default Driver
+|--------------------------------------------------------------------------
+|
+| This value determines which of the following gateway to use.
+| You can switch to a different driver at runtime.
+|
+*/
+    'default' => 'aqayepardakht',
 
     /*
     |--------------------------------------------------------------------------
@@ -314,9 +317,9 @@ return [
             'apiPaymentUrl' => 'https://panel.aqayepardakht.ir/startpay/',
             'apiPaymentUrlSandbox' => 'https://panel.aqayepardakht.ir/startpay/sandbox/',
             'apiVerificationUrl' => 'https://panel.aqayepardakht.ir/api/v2/verify',
-            'mode' => 'normal' , //normal | sandbox
+            'mode' => 'sandbox' , //normal | sandbox
             'callbackUrl' => '',
-            'pin' => '',
+            'pin' => 'sandbox',
             'invoice_id' => '',
             'mobile' => '',
             'email' => '',

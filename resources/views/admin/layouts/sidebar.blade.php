@@ -24,23 +24,38 @@
         </a>
       </li>
       <li class="menu-item">
-        <a href="{{ route('admin.book.index') }}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-book"></i>
-          <div>خرید کتاب</div>
-        </a>
-      </li>
-        <li class="menu-item">
-            <a href="{{ route('admin.book.library') }}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-book-open"></i>
-          <div>مشاهده کتابخانه شخصی</div>
-        </a>
-      </li>
-        <li class="menu-item">
-            <a href="{{ route('admin.transactionShow') }}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-money"></i>
-          <div>مشاهده تراکنش ها</div>
+        <a href="{{ route('admin.payment.setting.index') }}" class="menu-link">
+          <i class="menu-icon tf-icons bx bx-credit-card"></i>
+          <div>تنظیمات پرداخت </div>
         </a>
       </li>
 
-    </ul>
+        <li class="menu-item {{ request()->is('admin/book*') ? 'open' : '' }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-shopping-bag"></i>
+                <div>فروشگاه</div>
+            </a>
+            <ul class="menu-sub">
+
+                    <li class="menu-item {{ request()->is('admin/book/library*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.book.library') }}" class="menu-link">
+                            <div>مشاهده کتابخانه شخصی</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item {{ request()->is('admin/book/index*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.book.index') }}" class="menu-link">
+                            <div>خرید کتاب</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item {{ request()->is('admin/transactionShow*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.transactionShow') }}" class="menu-link">
+                            <div>مشاهده تراکنش ها</div>
+                        </a>
+                    </li>
+
+            </ul>
+        </li>
+
   </aside>

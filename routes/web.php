@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookPurchaseController;
@@ -104,6 +105,12 @@ Route::prefix('/admin')->middleware(['auth'])->group(function() {
         Route::get('/books/{book}/purchase',[BookPurchaseController::class,'purchase'])->name('admin.book.purchase');
         Route::get('/books/{book}/purchase/result',[BookPurchaseController::class,'result'])->name('admin.book.purchase.result');
         Route::get('/transactions',[BookPurchaseController::class,'transactionShow'])->name('admin.transactionShow');
+        //payment-setting
+        Route::prefix('/payment')->group(function() {
+            Route::get('/setting',[PaymentController::class,'index'])->name('admin.payment.setting.index');
+            Route::get('/setting/edit/{payment}',[PaymentController::class,'edit'])->name('admin.payment.setting.edit');
+            Route::get('/setting/show/{payment}',[PaymentController::class,'show'])->name('admin.payment.setting.show');
+    });
     });
 
 });
