@@ -21,9 +21,9 @@ class PaymentSettingSeeder extends Seeder
             ['name' => 'سامان','detail' => json_encode(['title' => 'saman','merchantId' => null]),'status' => 1],
             ['name' => 'پارسیان','detail' => json_encode(['title' => 'parsian','merchantId' => null]),'status' => 1],
             ['name' => 'سپهر','detail' => json_encode(['title' => 'sepehr','terminalId' => null]),'status' => 1],
-            ['name' => 'آسان پرداخت','detail' => json_encode(['title' => 'asanpardakht','merchantConfigID' => null,'username' => null,'password' => null]),'status' => 1],
-            ['name' => 'پارسارگاد','detail' => json_encode(['title' => 'pasargad','merchantId' => null,'terminalCode' => null,]),'status' => 1],
-            ['name' => 'زرین پال','detail' => json_encode(['title' => 'zarinpal','merchantId' => null ]),'status' => 1],
+            ['name' => 'آسان پرداخت','detail' => json_encode(['title' => 'asanpardakht','merchantId' => null,'username' => null,'password' => null]),'status' => 1],
+            ['name' => 'پارسارگاد','detail' => json_encode(['title' => 'pasargad','merchantId' => null,'terminalId' => null,]),'status' => 1],
+            ['name' => 'زرین پال','detail' => json_encode(['title' => 'zarinpal','merchantId' => null]),'is_default' => 1 ,'status' => 1],
 
         ];
 

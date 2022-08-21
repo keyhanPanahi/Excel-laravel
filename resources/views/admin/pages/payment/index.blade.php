@@ -18,27 +18,14 @@
     </ol>
 </nav>
 
-
-
-{{--    <div class="d-flex justify-content-between bd-highlight">--}}
-{{--        <div class="p-2 bd-highlight">--}}
-{{--            <a href="{{ route('admin.membership.user.create') }}" class="btn btn-primary " title="ایجاد کاربر"><i class="bx bx-user-plus"></i></a>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
     <div class="card mt-3">
         <div class="card-body">
             <table class="table table-hover table-striped text-center" id="myTable">
                 <thead>
                     <tr>
                         <th>نام</th>
-                        <th>username</th>
-                        <th>password</th>
-                        <th>merchant_id</th>
-                        <th>terminal_id</th>
-                        <th>key</th>
-                        <th>Payment_Identity</th>
                         <th>وضعیت</th>
+                        <th>پیش فرض</th>
                         <th>عملیات</th>
                     </tr>
                 </thead>
@@ -70,9 +57,11 @@
         $(function () {
             var table = $('#myTable').DataTable({
                 "aoColumnDefs": [
-                    { "bSortable": false, "aTargets": [ 7 ] },
-                    { "bSortable": false, "aTargets": [ 8 ] },
-                    { "bSearchable": false, "aTargets": [ 7 ] }
+                    { "bSortable": false, "aTargets": [ 2 ] },
+                    { "bSortable": false, "aTargets": [ 3 ] },
+                    { "bSortable": false, "aTargets": [ 1 ] },
+                    { "bSearchable": false, "aTargets": [ 2 ] },
+                    { "bSearchable": false, "aTargets": [ 1 ] }
                 ],
                 pageLength: 10,
                 processing: true,
@@ -81,13 +70,8 @@
                 ajax: '{{ route('admin.payment.setting.index') }}',
                 columns: [
                     { data: 'name', name: 'name'},
-                    { data: 'username', name: 'username'},
-                    { data: 'password', name: 'password'},
-                    { data: 'merchant_id', name: 'merchant_id'},
-                    { data: 'terminal_id', name: 'terminal_id'},
-                    { data: 'key', name: 'key'},
-                    { data: 'PaymentIdentity', name: 'PaymentIdentity'},
                     { data: 'status', name: 'status'},
+                    { data: 'is_default', name: 'is_default'},
                     { data: 'action', name: 'action'},
                 ],
             });

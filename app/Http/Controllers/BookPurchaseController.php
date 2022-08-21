@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin\Payment\PaymentSetting;
 use App\Models\Book;
-use App\Models\PurchasedBook;
 use Exception;
 use App\Models\Transaction;
 use Illuminate\Http\Request;

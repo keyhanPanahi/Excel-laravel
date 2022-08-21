@@ -12,50 +12,30 @@ class PaymentController extends Controller
     {
         if($request->ajax()){
             return DataTables::of(PaymentSetting::all())
-                ->editColumn('name',function(PaymentSetting $paymentSetting){
-                    return $paymentSetting->name;
-                })
-                ->addColumn('username',function(PaymentSetting $paymentSetting){
-                    return $paymentSetting->uesrname ?? '-';
-                })
-                ->addColumn('password',function(PaymentSetting $paymentSetting){
-                    return $paymentSetting->password ?? '-';
-                })
-                ->addColumn('merchant_id',function(PaymentSetting $paymentSetting){
-                    return $paymentSetting->merchant_id ?? '-';
-                })
-                ->addColumn('terminal_id',function(PaymentSetting $paymentSetting){
-                    return $paymentSetting->terminal_id ?? '-';
-                })
-                ->addColumn('key',function(PaymentSetting $paymentSetting){
-                    return $paymentSetting->key ?? '-';
-                })
-                ->addColumn('PaymentIdentity',function(PaymentSetting $paymentSetting){
-                    return $paymentSetting->PaymentIdentity ?? '-';
-                })
-                ->addColumn('paymentSetting',function(PaymentSetting $paymentSetting){
-                    return $paymentSetting->paymentSetting ?? '-';
-                })
+                ->addColumn('is_default',function(PaymentSetting $paymentSetting){
+                    if($paymentSetting->is_default == 1){
+                        return '<span class="badge bg-label-primary">پیش فرض</span>';
+                    } else{
+                        return '<span class="badge bg-label-secondary">-</span>';
+                    }                })
                 ->editColumn('status',function(PaymentSetting $paymentSetting){
                     if($paymentSetting->status == 0){
                         return '<span class="badge bg-label-danger">غیرفعال</span>';
-                    }
-                    elseif($paymentSetting->status == 1){
+                    } else{
                         return '<span class="badge bg-label-success">فعال</span>';
-                    }else{
-                        return '<span class="badge bg-label-primary">پیش فرض فعال</span>';
                     }
                 })
                 ->addColumn('action','admin.pages.payment.table.action')
-                ->rawColumns(['status' , 'action'])
+                ->rawColumns(['status','is_default' , 'action'])
                 ->make(true);
         }
         return view('admin.pages.payment.index');
     }
 
-    public function edit()
+    public function edit(PaymentSetting $payment)
     {
-        return view('admin.pages.payment.edit');
+
+        return view('admin.pages.payment.edit',compact('payment'));
     }
     public function update()
     {

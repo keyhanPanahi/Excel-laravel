@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->json('detail');
-            $table->tinyInteger('is_current')->default(0);
+            $table->tinyInteger('is_default')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

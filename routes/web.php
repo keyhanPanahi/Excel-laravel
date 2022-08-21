@@ -106,10 +106,11 @@ Route::prefix('/admin')->middleware(['auth'])->group(function() {
         Route::get('/books/{book}/purchase/result',[BookPurchaseController::class,'result'])->name('admin.book.purchase.result');
         Route::get('/transactions',[BookPurchaseController::class,'transactionShow'])->name('admin.transactionShow');
         //payment-setting
-        Route::prefix('/payment')->group(function() {
-            Route::get('/setting',[PaymentController::class,'index'])->name('admin.payment.setting.index');
-            Route::get('/setting/edit/{payment}',[PaymentController::class,'edit'])->name('admin.payment.setting.edit');
-            Route::get('/setting/show/{payment}',[PaymentController::class,'show'])->name('admin.payment.setting.show');
+        Route::prefix('/payment/setting')->group(function() {
+            Route::get('/',[PaymentController::class,'index'])->name('admin.payment.setting.index');
+            Route::get('edit/{payment}',[PaymentController::class,'edit'])->name('admin.payment.setting.edit');
+            Route::get('update/{payment}',[PaymentController::class,'update'])->name('admin.payment.setting.update');
+            Route::get('show/{payment}',[PaymentController::class,'show'])->name('admin.payment.setting.show');
     });
     });
 
