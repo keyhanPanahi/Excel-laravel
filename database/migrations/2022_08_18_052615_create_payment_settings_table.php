@@ -16,15 +16,10 @@ return new class extends Migration
         Schema::create('payment_settings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('username')->nullable();
-            $table->string('password')->nullable();
-            $table->string('merchant_id')->nullable();
-            $table->string('terminal_id')->nullable();
-            $table->string('key')->nullable();
-            $table->string('PaymentIdentity')->nullable();
-            $table->tinyInteger('status')->default(0);  //وضعیت
+            $table->json('detail');
+            $table->tinyInteger('is_current')->default(0);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

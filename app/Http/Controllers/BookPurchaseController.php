@@ -26,13 +26,16 @@ class BookPurchaseController extends Controller
 
     public function purchase(Book $book)
     {
-
+        $paymentDefault = PaymentSetting::all();
+        dd($paymentDefault);
         if ($book->isPurchased()){
             return to_route('admin.book.show',compact('book'));
         }else{
         try {
         $invoice = new Invoice();
         $invoice->amount($book->price);
+
+        config(['payment.drivers.zarinpal.merchantId' => $paymentDefault->merchant_id]);
         $user = Auth::user();
 
         $paymentId = md5(uniqid());
@@ -43,10 +46,11 @@ class BookPurchaseController extends Controller
             'payment_id' => $paymentId,
 
         ]);
-
         $callbackUrl = route('admin.book.purchase.result',[$book->id,'payment_id' => $paymentId]);
         $payment = Payment::callbackUrl($callbackUrl);
         $payment->config('description','خرید '.$book->title);
+        $payment->via($paymentDefault->title);
+
 
         $payment->purchase($invoice,function($driver,$transactionId) use ($transaction){
             $transaction->transaction_id = $transactionId;
@@ -112,6 +116,7 @@ class BookPurchaseController extends Controller
 
     public function transactionShow(Request $request )
     {
+        dd(Transaction::all());
         if ($request->ajax()) {
             return DataTables::of(Transaction::select('id','payment_id','user_id','book_id','paid','status','transaction_id')->orderBy('id', 'DESC'))
                 ->editColumn('payment_id', function (Transaction $transaction) {
@@ -141,6 +146,11 @@ class BookPurchaseController extends Controller
                 ->make(true);
         }
         return view('admin.pages.book.transactionIndex');
+    }
+
+    public function zarinpal()
+    {
+
     }
 
 

@@ -30,6 +30,9 @@ class PaymentController extends Controller
                 ->addColumn('key',function(PaymentSetting $paymentSetting){
                     return $paymentSetting->key ?? '-';
                 })
+                ->addColumn('PaymentIdentity',function(PaymentSetting $paymentSetting){
+                    return $paymentSetting->PaymentIdentity ?? '-';
+                })
                 ->addColumn('paymentSetting',function(PaymentSetting $paymentSetting){
                     return $paymentSetting->paymentSetting ?? '-';
                 })
@@ -48,6 +51,15 @@ class PaymentController extends Controller
                 ->make(true);
         }
         return view('admin.pages.payment.index');
+    }
+
+    public function edit()
+    {
+        return view('admin.pages.payment.edit');
+    }
+    public function update()
+    {
+//        return view('admin.pages.payment.edit');
     }
 
 }
