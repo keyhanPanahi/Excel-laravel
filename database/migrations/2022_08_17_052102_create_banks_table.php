@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payment_settings', function (Blueprint $table) {
+        Schema::create('banks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('organization_id')->constrained('organizations')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('bank_id')->constrained('banks')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->json('detail');
-            $table->tinyInteger('is_default')->default(0);
+            $table->string('name');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_settings');
+        Schema::dropIfExists('banks');
     }
 };

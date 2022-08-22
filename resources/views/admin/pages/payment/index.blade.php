@@ -17,13 +17,20 @@
         <li class="breadcrumb-item active">تنظیمات پرداخت</li>
     </ol>
 </nav>
-
+<div class="p-2 bd-highlight">
+    <!-- Organization List Table -->
+    <a class="dt-button add-new btn btn-primary text-white" href="{{ route('admin.membership.organization.payment.setting.create',$organization->id) }}">
+            <span> <i class="bx bx-plus me-0"></i>
+            ایجاد
+            </span>
+    </a>
+</div>
     <div class="card mt-3">
         <div class="card-body">
             <table class="table table-hover table-striped text-center" id="myTable">
                 <thead>
                     <tr>
-                        <th>نام</th>
+                        <th>نام بانک</th>
                         <th>وضعیت</th>
                         <th>پیش فرض</th>
                         <th>عملیات</th>
@@ -67,9 +74,9 @@
                 processing: true,
                 serverSide: true,
                 // responsive: true,
-                ajax: '{{ route('admin.payment.setting.index') }}',
+                ajax: '{{ route('admin.membership.organization.payment.setting.index',$organization->id) }}',
                 columns: [
-                    { data: 'name', name: 'name'},
+                    { data: 'bank_id', name: 'bank_id'},
                     { data: 'status', name: 'status'},
                     { data: 'is_default', name: 'is_default'},
                     { data: 'action', name: 'action'},

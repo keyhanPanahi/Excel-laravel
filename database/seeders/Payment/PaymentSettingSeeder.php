@@ -16,14 +16,14 @@ class PaymentSettingSeeder extends Seeder
     public function run()
     {
         $payments = [
-            ['name' => 'سداد','detail' => json_encode(['title' => 'sadad','merchantId' => null,'key' => null,'terminalId' => null, 'PaymentIdentity' => null]),'status' => 1],
-            ['name' => 'به پرداخت','detail' => json_encode(['title' => 'behpardakht','terminalId' => null,'username' => null,'password' => null]),'status' => 1],
-            ['name' => 'سامان','detail' => json_encode(['title' => 'saman','merchantId' => null]),'status' => 1],
-            ['name' => 'پارسیان','detail' => json_encode(['title' => 'parsian','merchantId' => null]),'status' => 1],
-            ['name' => 'سپهر','detail' => json_encode(['title' => 'sepehr','terminalId' => null]),'status' => 1],
-            ['name' => 'آسان پرداخت','detail' => json_encode(['title' => 'asanpardakht','merchantId' => null,'username' => null,'password' => null]),'status' => 1],
-            ['name' => 'پارسارگاد','detail' => json_encode(['title' => 'pasargad','merchantId' => null,'terminalId' => null,]),'status' => 1],
-            ['name' => 'زرین پال','detail' => json_encode(['title' => 'zarinpal','merchantId' => null]),'is_default' => 1 ,'status' => 1],
+//            ['name' => 'سداد','detail' => json_encode(['title' => 'sadad','merchantId' => null,'key' => null,'terminalId' => null, 'PaymentIdentity' => null]),'status' => 1],
+//            ['name' => 'به پرداخت','detail' => json_encode(['title' => 'behpardakht','terminalId' => null,'username' => null,'password' => null]),'status' => 1],
+//            ['name' => 'سامان','detail' => json_encode(['title' => 'saman','merchantId' => null]),'status' => 1],
+//            ['name' => 'پارسیان','detail' => json_encode(['title' => 'parsian','merchantId' => null]),'status' => 1],
+//            ['name' => 'سپهر','detail' => json_encode(['title' => 'sepehr','terminalId' => null]),'status' => 1],
+//            ['name' => 'آسان پرداخت','detail' => json_encode(['title' => 'asanpardakht','merchantId' => null,'username' => null,'password' => null]),'status' => 1],
+//            ['name' => 'پارسارگاد','detail' => json_encode(['title' => 'pasargad','merchantId' => null,'terminalId' => null,]),'status' => 1],
+            ['organization_id' => 3,'bank_id' => 8,'detail' => json_encode(['title' => 'zarinpal','merchantId' => null]),'is_default' => 1 ,'status' => 1],
 
         ];
 

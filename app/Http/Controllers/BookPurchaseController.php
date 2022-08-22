@@ -25,16 +25,15 @@ class BookPurchaseController extends Controller
 
     public function purchase(Book $book)
     {
-        $paymentDefault = PaymentSetting::all();
-        dd($paymentDefault);
+        $paymentDefault = PaymentSetting::where('id',8)->first();
         if ($book->isPurchased()){
             return to_route('admin.book.show',compact('book'));
         }else{
         try {
         $invoice = new Invoice();
         $invoice->amount($book->price);
-
-        config(['payment.drivers.zarinpal.merchantId' => $paymentDefault->merchant_id]);
+//        $invoice->via(json_decode($paymentDefault->detail)->title);
+//        config(['payment.drivers.zarinpal.merchantId' => json_decode($paymentDefault->detail)->merchantId]);
         $user = Auth::user();
 
         $paymentId = md5(uniqid());
@@ -46,10 +45,9 @@ class BookPurchaseController extends Controller
 
         ]);
         $callbackUrl = route('admin.book.purchase.result',[$book->id,'payment_id' => $paymentId]);
-        $payment = Payment::callbackUrl($callbackUrl);
+        $payment = Payment::via(json_decode($paymentDefault->detail)->title);
+        $payment->callbackUrl($callbackUrl);
         $payment->config('description','خرید '.$book->title);
-        $payment->via($paymentDefault->title);
-
 
         $payment->purchase($invoice,function($driver,$transactionId) use ($transaction){
             $transaction->transaction_id = $transactionId;
@@ -74,6 +72,7 @@ class BookPurchaseController extends Controller
         if ($request->missing('payment_id')) {
             return to_route('admin.book.index')->with('toast-error','مشکلی به وجود آمده است');
         }
+
         $transaction = Transaction::where('payment_id',$request->payment_id)->first();
         if (empty($transaction)|
             $transaction->user_id !== Auth::id()|
@@ -83,6 +82,7 @@ class BookPurchaseController extends Controller
             return to_route('admin.book.index')->with('toast-error','مشکلی به وجود آمده است');
         }
         try {
+
             $receipt = Payment::amount($transaction->paid)->transactionId($transaction->transaction_id)->verify();
 
             $transaction->transaction_result = $receipt;
@@ -91,7 +91,6 @@ class BookPurchaseController extends Controller
             Auth::user()->purchasedBooks()->create([
                 'book_id' => $book->id
             ]);
-
             return view('admin.pages.book.result')->with([
                 'status'=>1,
                 'message' => $receipt->getReferenceId(),
@@ -107,7 +106,7 @@ class BookPurchaseController extends Controller
                     'code' => $e->getCode(),
                 ];
                 $transaction->save();
-
+                    dd('hi');
                 return view('admin.pages.book.result')->with(['status'=>$e->getCode(),'message' => $e->getMessage()]);
             }
         }
@@ -115,7 +114,6 @@ class BookPurchaseController extends Controller
 
     public function transactionShow(Request $request )
     {
-        dd(Transaction::all());
         if ($request->ajax()) {
             return DataTables::of(Transaction::select('id','payment_id','user_id','book_id','paid','status','transaction_id')->orderBy('id', 'DESC'))
                 ->editColumn('payment_id', function (Transaction $transaction) {

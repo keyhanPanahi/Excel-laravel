@@ -76,6 +76,15 @@ Route::prefix('/admin')->middleware(['auth'])->group(function() {
             Route::put('/update/{organization}',[OrganizationController::class, 'update'])->name('admin.membership.organization.update');
             Route::post('/destroy',[OrganizationController::class , 'destroy'])->name('admin.membership.organization.destroy');
             Route::post('/status',[OrganizationController::class , 'status'])->name('admin.membership.organization.status');
+            //payment-setting
+            Route::prefix('/{organization}/paymentSetting')->group(function() {
+                Route::get('/',[PaymentController::class,'index'])->name('admin.membership.organization.payment.setting.index');
+                Route::get('/create',[PaymentController::class,'create'])->name('admin.membership.organization.payment.setting.create');
+                Route::post('/store',[PaymentController::class,'store'])->name('admin.membership.organization.payment.setting.store');
+                Route::get('/edit/{payment}',[PaymentController::class,'edit'])->name('admin.membership.organization.payment.setting.edit');
+                Route::put('/update/{payment}',[PaymentController::class,'update'])->name('admin.membership.organization.payment.setting.update');
+                Route::get('show/{payment}',[PaymentController::class,'show'])->name('admin.membership.organization.payment.setting.show');
+            });
         });
 
         //role
@@ -105,13 +114,7 @@ Route::prefix('/admin')->middleware(['auth'])->group(function() {
         Route::get('/books/{book}/purchase',[BookPurchaseController::class,'purchase'])->name('admin.book.purchase');
         Route::get('/books/{book}/purchase/result',[BookPurchaseController::class,'result'])->name('admin.book.purchase.result');
         Route::get('/transactions',[BookPurchaseController::class,'transactionShow'])->name('admin.transactionShow');
-        //payment-setting
-        Route::prefix('/payment/setting')->group(function() {
-            Route::get('/',[PaymentController::class,'index'])->name('admin.payment.setting.index');
-            Route::get('edit/{payment}',[PaymentController::class,'edit'])->name('admin.payment.setting.edit');
-            Route::get('update/{payment}',[PaymentController::class,'update'])->name('admin.payment.setting.update');
-            Route::get('show/{payment}',[PaymentController::class,'show'])->name('admin.payment.setting.show');
-    });
+
     });
 
 });

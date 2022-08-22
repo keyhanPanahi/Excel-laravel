@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin\Payment\PaymentSetting;
+use App\Models\Membership\Organization;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
 class PaymentController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request,Organization $organization)
     {
         if($request->ajax()){
             return DataTables::of(PaymentSetting::all())
+                ->addCloumn('bank_id',function (PaymentSetting $paymentSetting){
+                    return $paymentSetting->bank_id;
+                })
                 ->addColumn('is_default',function(PaymentSetting $paymentSetting){
                     if($paymentSetting->is_default == 1){
                         return '<span class="badge bg-label-primary">پیش فرض</span>';
@@ -29,7 +33,7 @@ class PaymentController extends Controller
                 ->rawColumns(['status','is_default' , 'action'])
                 ->make(true);
         }
-        return view('admin.pages.payment.index');
+        return view('admin.pages.payment.index',compact('organization'));
     }
 
     public function edit(PaymentSetting $payment)

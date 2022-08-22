@@ -23,12 +23,12 @@
           <div>داشبورد</div>
         </a>
       </li>
-      <li class="menu-item">
-        <a href="{{ route('admin.payment.setting.index') }}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-credit-card"></i>
-          <div>تنظیمات پرداخت </div>
-        </a>
-      </li>
+{{--      <li class="menu-item">--}}
+{{--        <a href="{{ route('admin.payment.setting.index') }}" class="menu-link">--}}
+{{--          <i class="menu-icon tf-icons bx bx-credit-card"></i>--}}
+{{--          <div>تنظیمات پرداخت </div>--}}
+{{--        </a>--}}
+{{--      </li>--}}
 
         <li class="menu-item {{ request()->is('admin/book*') ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
