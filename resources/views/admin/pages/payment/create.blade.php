@@ -158,7 +158,7 @@
                 document.getElementById('divPassword').classList.remove('d-none');
 
             }
-            if (number == 1 ||  number == 3 || number == 4 || number == 5 || number == 7){
+            if (number == 1 ||  number == 3 || number == 4 || number == 5 || number == 7 || number == 8){
                 document.getElementById('divUsername').classList.add('d-none');
                 document.getElementById('divPassword').classList.add('d-none');
 
@@ -167,7 +167,7 @@
                 document.getElementById('divPaymentIdentity').classList.remove('d-none');
                 document.getElementById('divKey').classList.remove('d-none');
             }
-            if (number == 2 ||  number == 3 || number == 4 || number == 5 || number == 6 || number == 7){
+            if (number == 2 ||  number == 3 || number == 4 || number == 5 || number == 6 || number == 7 || number == 8){
                 document.getElementById('divPaymentIdentity').classList.add('d-none');
                 document.getElementById('divKey').classList.add('d-none');
             }

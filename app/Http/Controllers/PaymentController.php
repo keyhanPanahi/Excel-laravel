@@ -6,6 +6,8 @@ use App\Models\Admin\Payment\Bank;
 use App\Models\Admin\Payment\PaymentSetting;
 use App\Models\Membership\Organization;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 use Yajra\DataTables\DataTables;
 
 class PaymentController extends Controller
@@ -15,7 +17,7 @@ class PaymentController extends Controller
         if($request->ajax()){
             return DataTables::of(PaymentSetting::all())
                 ->editColumn('bank_id', function (PaymentSetting $paymentSetting) {
-                    return $paymentSetting->bank->name;
+                    return $paymentSetting->bank->persian_name;
                 })
                 ->addColumn('is_default',function(PaymentSetting $paymentSetting){
                     if($paymentSetting->is_default == 1){
@@ -42,13 +44,36 @@ class PaymentController extends Controller
 
     public function create(Organization $organization)
     {
-        $banks = Bank::select('id','persian_name')->get();
+        $banks = Bank::where('status',1)->select('id','persian_name')->get();
         return view('admin.pages.payment.create',compact('organization','banks'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request,Organization $organization)
     {
-        $request->all();
+        $inputs =$request->all();
+        $inputs['organization_id'] = Auth::user()->organization->id;
+        $request->status == 'on' ? $inputs['status']=1 : $inputs['status']=0 ;
+        if($inputs['bank_id'] == 1){
+            unset($inputs['username'],$inputs['password']);
+        }
+        elseif($inputs['bank_id'] == 2){
+            unset($inputs['merchantId'],$inputs['key'],$inputs['PaymentIdentity']);
+        }
+        elseif($inputs['bank_id'] == 6){
+            unset($inputs['terminalId'],$inputs['key'],$inputs['PaymentIdentity']);
+        }
+        elseif($inputs['bank_id'] == 7){
+            unset($inputs['username'],$inputs['password'],$inputs['key'],$inputs['PaymentIdentity']);
+        }
+        elseif($inputs['bank_id'] == 3||4||5||8){
+            unset($inputs['username'],$inputs['password'],$inputs['terminalId'],$inputs['key'],$inputs['PaymentIdentity']);
+        }
+
+        $detail = Arr::except($inputs,['organization_id','bank_id','status','_token']);
+        $inputs['detail'] =json_encode($detail);
+        $payment_setting = PaymentSetting::create($inputs);
+        return to_route('admin.membership.organization.payment.setting.index',compact('organization'))->with('toast-success', 'درگاه با موفقیت ایجاد گردید.');
+
     }
 
     public function edit(PaymentSetting $payment)
