@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('organization_id')->constrained('organizations')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('bank_id')->constrained('banks')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->json('detail');
+            $table->json('detail')->nullable();
             $table->tinyInteger('is_default')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

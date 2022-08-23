@@ -16,14 +16,14 @@ class BankSeeder extends Seeder
     public function run()
     {
         $banks = [
-            ['name' => 'سداد','status' => 1],
-            ['name' => 'به پرداخت','status' => 1],
-            ['name' => 'سامان','status' => 1],
-            ['name' => 'پارسیان','status' => 1],
-            ['name' => 'سپهر','status' => 1],
-            ['name' => 'آسان پرداخت','status' => 1],
-            ['name' => 'پارسارگاد','status' => 1],
-            ['name' => 'زرین پال','status' => 1],
+            ['persian_name' => 'سداد','english_name'=>'sedad','status' => 1],
+            ['persian_name' => 'به پرداخت','english_name'=>'behpardakht','status' => 1],
+            ['persian_name' => 'سامان','english_name'=>'saman','status' => 1],
+            ['persian_name' => 'پارسیان','english_name'=>'parsian','status' => 1],
+            ['persian_name' => 'سپهر','english_name'=>'sepehr','status' => 1],
+            ['persian_name' => 'آسان پرداخت','english_name'=>'asanpardakht','status' => 1],
+            ['persian_name' => 'پارسارگاد','english_name'=>'pasargad','status' => 1],
+            ['persian_name' => 'زرین پال','english_name'=>'zarinpal','status' => 1],
 
         ];
 
