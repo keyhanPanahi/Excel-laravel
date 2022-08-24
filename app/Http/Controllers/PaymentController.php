@@ -44,7 +44,8 @@ class PaymentController extends Controller
 
     public function create(Organization $organization)
     {
-        $banks = Bank::where('status',1)->select('id','persian_name')->get();
+        $paymentSetting=PaymentSetting::select('bank_id')->get();
+        $banks = Bank::where('status',1)->whereNotIn('id',$paymentSetting)->get();
         return view('admin.pages.payment.create',compact('organization','banks'));
     }
 
